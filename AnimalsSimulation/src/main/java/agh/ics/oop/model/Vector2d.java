@@ -51,7 +51,7 @@ public class Vector2d {
 
     public Vector2d lowerLeft(Vector2d other) {
         int newX = Math.min( this.x, other.x );
-        int newY = Math.max( this.y, other.y );
+        int newY = Math.min( this.y, other.y );
         return new Vector2d(newX, newY);
     }
 
