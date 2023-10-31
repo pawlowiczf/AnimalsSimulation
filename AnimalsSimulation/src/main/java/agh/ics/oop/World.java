@@ -3,7 +3,7 @@ import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
 
-import static agh.ics.oop.OptionsParser.DirectionParser;
+import static agh.ics.oop.OptionsParser.directionParser;
 
 
 public class World {
@@ -28,7 +28,7 @@ public class World {
         //
         System.out.println("System wystartował");
 
-        MoveDirection[] MoveDirection = DirectionParser(args);
+        MoveDirection[] MoveDirection = directionParser(args);
         run(MoveDirection);
 
         System.out.println("System zakończył działanie");
