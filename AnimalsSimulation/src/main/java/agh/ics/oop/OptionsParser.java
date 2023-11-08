@@ -7,7 +7,6 @@ public class OptionsParser
 {
     public static MoveDirection[] directionParser(String[] args)
     {
-        List <MoveDirection> = new ArrayList<MoveDirection>();
 
         // 1) Finding the length of array with proper inputs (i.e "f", "b", "r", "l")
         int length = 0;
