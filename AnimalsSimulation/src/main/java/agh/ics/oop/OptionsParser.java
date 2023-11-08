@@ -3,7 +3,7 @@ import agh.ics.oop.model.MoveDirection;
 
 public class OptionsParser
 {
-    public static MoveDirection[] DirectionParser(String[] args)
+    public static MoveDirection[] directionParser(String[] args)
     {
         // 1) Finding the length of array with proper inputs (i.e "f", "b", "r", "l")
         int length = 0;
@@ -13,7 +13,7 @@ public class OptionsParser
 
         // 2) Creating proper array containing ENUM MoveDirection constants
         int index = 0;
-        MoveDirection[] Directions = new MoveDirection[length];
+        MoveDirection[] directions = new MoveDirection[length];
 
         for (String x : args) {
             //
@@ -26,13 +26,13 @@ public class OptionsParser
             };
 
             if ( result != null ) {
-                Directions[index] = result;
+                directions[index] = result;
                 index++;
             }
         }
 
         //
-        return Directions;
+        return directions;
     }
 }
 
