@@ -7,15 +7,19 @@ public class Animal {
 
     public Animal() {
 
-    }
+    } // default constructor
+
     public Animal(int x, int y) {
         //
         this.position = new Vector2d(x, y);
-    }
+    } // constructor
+
+
+    // Methods:
 
     @Override
     public String toString() {
-        return "orientation = " + orientation + ", position = " + position;
+        return orientation + " " + position;
     }
 
     public boolean isAt(Vector2d position) {
@@ -29,16 +33,16 @@ public class Animal {
             case LEFT     -> orientation = orientation.previous();
 
             case FORWARD  -> {
-                    if ( position.precedes( new Vector2d(4,4) ) )
-                        this.position = position.add( orientation.toUnitVector() );
+                if ( position.add( orientation.toUnitVector() ).precedes( new Vector2d(4,4) ) )
+                    position = this.position.add( orientation.toUnitVector() );
             }
 
             case BACKWARD -> {
-                    if ( position.follow( new Vector2d(-4, -4) ) )
-                        position.subtract( orientation.toUnitVector() );
+                if ( position.subtract( orientation.toUnitVector() ).follow( new Vector2d(-4, -4) ) )
+                    position = this.position.subtract( orientation.toUnitVector() );
             }
         };
-    }
+    } // end 'move' method
 
-}
+} // end 'Animal' class
 
