@@ -57,7 +57,6 @@ public class Animal {
     public MapDirection getOrientation() {
         return this.orientation;
     } // getter for unit-tests
-    public Vector2d getPosition() { return this.position; }
 
 } // end 'Animal' class
 
