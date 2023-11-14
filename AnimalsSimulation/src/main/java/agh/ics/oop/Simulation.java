@@ -46,4 +46,9 @@ public class Simulation {
         return animals;
     } // getter for unit-tests
 
+    // W powyższym zadaniu sprawdza się implementacja listy, z której korzystam. Nie wydaje mi się zasadne, by używać innej.
+    // Jedynym zastrzeżeniem może być ciągłe używanie operacji modulo - gdybyśmy mieli cykliczną (zapętloną) link listę,
+    // to nie musielibyśmy z tego korzystać, ale coś takiego, tak myślę, wymaga własnej implementacji.
+
+
 } // end 'Simulation' class
