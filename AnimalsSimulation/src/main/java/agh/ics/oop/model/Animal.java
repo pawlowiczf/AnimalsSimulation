@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import java.util.Vector;
+
 public class Animal {
     //
     private MapDirection orientation = MapDirection.NORTH;
@@ -33,16 +35,28 @@ public class Animal {
             case LEFT     -> orientation = orientation.previous();
 
             case FORWARD  -> {
-                if ( position.add( orientation.toUnitVector() ).precedes( new Vector2d(4,4) ) )
+                if ( position.add( orientation.toUnitVector() ).precedes( new Vector2d(4,4)    ) &&
+                     position.add( orientation.toUnitVector() ).follow(   new Vector2d(-4, -4) ) )
+                {
                     position = this.position.add( orientation.toUnitVector() );
+                }
+
             }
 
             case BACKWARD -> {
-                if ( position.subtract( orientation.toUnitVector() ).follow( new Vector2d(-4, -4) ) )
+                if ( position.subtract( orientation.toUnitVector() ).follow(   new Vector2d(-4, -4) ) &&
+                     position.subtract( orientation.toUnitVector() ).precedes( new Vector2d(4,4)    ) )
+                {
                     position = this.position.subtract( orientation.toUnitVector() );
+                }
+
             }
         };
     } // end 'move' method
+
+    public MapDirection getOrientation() {
+        return this.orientation;
+    } // getter for unit-tests
 
 } // end 'Animal' class
 
