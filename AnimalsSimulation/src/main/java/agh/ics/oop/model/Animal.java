@@ -36,7 +36,7 @@ public class Animal {
 
             case FORWARD  -> {
                 if ( position.add( orientation.toUnitVector() ).precedes( new Vector2d(4,4)    ) &&
-                     position.add( orientation.toUnitVector() ).follow(   new Vector2d(-4, -4) ) )
+                     position.add( orientation.toUnitVector() ).follow(   new Vector2d(0, 0) ) )
                 {
                     position = this.position.add( orientation.toUnitVector() );
                 }
@@ -44,7 +44,7 @@ public class Animal {
             }
 
             case BACKWARD -> {
-                if ( position.subtract( orientation.toUnitVector() ).follow(   new Vector2d(-4, -4) ) &&
+                if ( position.subtract( orientation.toUnitVector() ).follow(   new Vector2d(0, 0) ) &&
                      position.subtract( orientation.toUnitVector() ).precedes( new Vector2d(4,4)    ) )
                 {
                     position = this.position.subtract( orientation.toUnitVector() );
@@ -57,6 +57,7 @@ public class Animal {
     public MapDirection getOrientation() {
         return this.orientation;
     } // getter for unit-tests
+    public Vector2d getPosition() { return this.position; }
 
 } // end 'Animal' class
 

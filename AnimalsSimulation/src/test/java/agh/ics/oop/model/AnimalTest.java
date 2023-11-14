@@ -51,9 +51,9 @@ class AnimalTest {
 
         // then
         assertTrue( animalA.isAt( new Vector2d(4,4)   ) );
-        assertTrue( animalB.isAt( new Vector2d(5,5)   ) );
-        assertTrue( animalC.isAt( new Vector2d(0,-3)  ) );
-        assertTrue( animalD.isAt( new Vector2d(-1 ,3) ) );
+        assertTrue( animalB.isAt( new Vector2d(5,5)   ) ); // nic nie powinno się stać (zwierzę poza mapą)
+        assertTrue( animalC.isAt( new Vector2d(-3,-3)  ) ); // nic nie powinno się stać (zwierzę poza mapą)
+        assertTrue( animalD.isAt( new Vector2d(0 ,3) ) );
     }
 
     @Test
@@ -63,6 +63,7 @@ class AnimalTest {
         Animal animalB = new Animal(-4, -4);
         Animal animalC = new Animal(-4, 4);
         Animal animalD = new Animal(4, -4);
+        Animal animalE = new Animal(0 ,0);
 
         // when
         animalA.move( MoveDirection.FORWARD  );
@@ -81,11 +82,17 @@ class AnimalTest {
         animalD.move( MoveDirection.RIGHT    );
         animalD.move( MoveDirection.FORWARD  );
 
+        animalE.move( MoveDirection.FORWARD );
+        animalE.move( MoveDirection.FORWARD );
+        animalE.move( MoveDirection.FORWARD );
+        animalE.move( MoveDirection.FORWARD );
+
         // then
         assertTrue( animalA.isAt( new Vector2d(4,  4) ) );
-        assertTrue( animalB.isAt( new Vector2d(-4,-4) ) );
-        assertTrue( animalC.isAt( new Vector2d(-4, 4) ) );
-        assertTrue( animalD.isAt( new Vector2d(4, -4) ) );
+        assertTrue( animalB.isAt( new Vector2d(-4,-4) ) ); // nic nie powinno się stać (zwierzę poza mapą)
+        assertTrue( animalC.isAt( new Vector2d(-4, 4) ) ); // nic nie powinno się stać (zwierzę poza mapą)
+        assertTrue( animalD.isAt( new Vector2d(4, -4) ) ); // nic nie powinno się stać (zwierzę poza mapą)
+        assertTrue( animalE.isAt( new Vector2d(0, 4)  ) );
 
     }
 }

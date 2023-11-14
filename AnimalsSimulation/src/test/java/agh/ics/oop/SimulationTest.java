@@ -31,8 +31,9 @@ class SimulationTest {
         // when
         Vector2d newPosA = new Vector2d(2, 2);
         Vector2d newPosB = new Vector2d(0, 2);
-        Vector2d newPosC = new Vector2d(-1, 3);
+        Vector2d newPosC = new Vector2d(-1, 1); // w tym przypadku pozycja nie powinna się zmienić - zwierzę jest poza mapą
         simulation.run();
+
         List <Vector2d> newPositions = new ArrayList<>( Arrays.asList( newPosA, newPosB, newPosC ) );
         List <Animal> animals = simulation.getAnimalsList();
 
