@@ -8,12 +8,10 @@ import java.util.List;
 
 public class Simulation {
     //
-    List <Vector2d> positions;
-    List <MoveDirection> directions;
-    List <Animal> animals = new ArrayList<>();
+    private List <MoveDirection> directions;
+    private List <Animal> animals = new ArrayList<>();
 
     public Simulation(List <Vector2d> positions, List <MoveDirection> directions) {
-        this.positions  = positions;
         this.directions = directions;
 
         for( Vector2d position : positions ) {
@@ -45,10 +43,5 @@ public class Simulation {
     public List<Animal> getAnimalsList() {
         return animals;
     } // getter for unit-tests
-
-    // W powyższym zadaniu sprawdza się implementacja listy, z której korzystam. Nie wydaje mi się zasadne, by używać innej.
-    // Jedynym zastrzeżeniem może być ciągłe używanie operacji modulo - gdybyśmy mieli cykliczną (zapętloną) link listę,
-    // to nie musielibyśmy z tego korzystać, ale coś takiego, tak myślę, wymaga własnej implementacji.
-
 
 } // end 'Simulation' class
