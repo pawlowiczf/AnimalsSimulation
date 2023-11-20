@@ -58,5 +58,8 @@ public class Animal {
         return this.orientation;
     } // getter for unit-tests
 
+    public Vector2d getPosition() {
+        return position;
+    }
 } // end 'Animal' class
 
