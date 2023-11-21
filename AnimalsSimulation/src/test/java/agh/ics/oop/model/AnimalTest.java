@@ -24,30 +24,31 @@ class AnimalTest {
     @Test
     public void doesAnimalMoveProperlyOnBoard() {
         // given
+        MoveValidator validator = new RectangularMap(4,4);
         Animal animalA = new Animal(3, 4);
         Animal animalB = new Animal(5, 5);
         Animal animalC = new Animal(-3, -3);
         Animal animalD = new Animal(0,0);
         // when
-        animalA.move( MoveDirection.FORWARD );
-        animalA.move( MoveDirection.FORWARD );
-        animalA.move( MoveDirection.RIGHT   );
-        animalA.move( MoveDirection.FORWARD );
-        animalA.move( MoveDirection.LEFT    );
+        animalA.move( MoveDirection.FORWARD, validator );
+        animalA.move( MoveDirection.FORWARD, validator );
+        animalA.move( MoveDirection.RIGHT, validator   );
+        animalA.move( MoveDirection.FORWARD, validator );
+        animalA.move( MoveDirection.LEFT, validator    );
 
-        animalB.move( MoveDirection.BACKWARD);
+        animalB.move( MoveDirection.BACKWARD, validator);
 
-        animalC.move( MoveDirection.RIGHT   );
-        animalC.move( MoveDirection.FORWARD );
-        animalC.move( MoveDirection.FORWARD );
-        animalC.move( MoveDirection.FORWARD );
+        animalC.move( MoveDirection.RIGHT, validator   );
+        animalC.move( MoveDirection.FORWARD, validator );
+        animalC.move( MoveDirection.FORWARD, validator );
+        animalC.move( MoveDirection.FORWARD, validator );
 
-        animalD.move( MoveDirection.FORWARD );
-        animalD.move( MoveDirection.FORWARD );
-        animalD.move( MoveDirection.LEFT    );
-        animalD.move( MoveDirection.FORWARD );
-        animalD.move( MoveDirection.LEFT    );
-        animalD.move( MoveDirection.BACKWARD);
+        animalD.move( MoveDirection.FORWARD, validator );
+        animalD.move( MoveDirection.FORWARD, validator );
+        animalD.move( MoveDirection.LEFT, validator    );
+        animalD.move( MoveDirection.FORWARD, validator );
+        animalD.move( MoveDirection.LEFT, validator    );
+        animalD.move( MoveDirection.BACKWARD, validator);
 
         // then
         assertTrue( animalA.isAt( new Vector2d(4,4)   ) );
@@ -59,6 +60,7 @@ class AnimalTest {
     @Test
     public void doesNotAnimalCrossMapBorder() {
         // given
+        MoveValidator validator = new RectangularMap(4,4);
         Animal animalA = new Animal(4,4);
         Animal animalB = new Animal(-4, -4);
         Animal animalC = new Animal(-4, 4);
@@ -66,26 +68,26 @@ class AnimalTest {
         Animal animalE = new Animal(0 ,0);
 
         // when
-        animalA.move( MoveDirection.FORWARD  );
-        animalA.move( MoveDirection.RIGHT    );
-        animalA.move( MoveDirection.FORWARD  );
+        animalA.move( MoveDirection.FORWARD, validator  );
+        animalA.move( MoveDirection.RIGHT, validator    );
+        animalA.move( MoveDirection.FORWARD, validator  );
 
-        animalB.move( MoveDirection.BACKWARD );
-        animalB.move( MoveDirection.LEFT     );
-        animalB.move( MoveDirection.FORWARD  );
+        animalB.move( MoveDirection.BACKWARD, validator );
+        animalB.move( MoveDirection.LEFT, validator     );
+        animalB.move( MoveDirection.FORWARD, validator  );
 
-        animalC.move( MoveDirection.FORWARD  );
-        animalC.move( MoveDirection.LEFT     );
-        animalC.move( MoveDirection.FORWARD  );
+        animalC.move( MoveDirection.FORWARD, validator  );
+        animalC.move( MoveDirection.LEFT, validator     );
+        animalC.move( MoveDirection.FORWARD, validator  );
 
-        animalD.move( MoveDirection.BACKWARD );
-        animalD.move( MoveDirection.RIGHT    );
-        animalD.move( MoveDirection.FORWARD  );
+        animalD.move( MoveDirection.BACKWARD, validator );
+        animalD.move( MoveDirection.RIGHT, validator    );
+        animalD.move( MoveDirection.FORWARD, validator  );
 
-        animalE.move( MoveDirection.FORWARD );
-        animalE.move( MoveDirection.FORWARD );
-        animalE.move( MoveDirection.FORWARD );
-        animalE.move( MoveDirection.FORWARD );
+        animalE.move( MoveDirection.FORWARD, validator );
+        animalE.move( MoveDirection.FORWARD, validator );
+        animalE.move( MoveDirection.FORWARD, validator );
+        animalE.move( MoveDirection.FORWARD, validator );
 
         // then
         assertTrue( animalA.isAt( new Vector2d(4,  4) ) );

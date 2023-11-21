@@ -40,7 +40,7 @@ public class Simulation {
 
             index += 1;
             System.out.println( animalsPark );
-        } // end 'for' loop
+        } // end 'for each' loop
 
     } // end 'run' method
 
