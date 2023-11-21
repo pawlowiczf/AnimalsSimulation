@@ -64,4 +64,8 @@ public class RectangularMap implements WorldMap {
         MapVisualizer visualizer = new MapVisualizer(this);
         return visualizer.draw(new Vector2d(0, 0), new Vector2d(width, height) );
     }
+
+    public Map<Vector2d, Animal> getAnimals() {
+        return animals;
+    }
 }

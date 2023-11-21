@@ -1,7 +1,6 @@
 package agh.ics.oop;
-import agh.ics.oop.model.MapDirection;
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,13 +37,13 @@ public class World {
         positions = new ArrayList<>();
         positions.add( new Vector2d(2, 2 ) );
         positions.add( new Vector2d(3, 2 ) );
+        positions.add( new Vector2d(0,0  ) );
+        RectangularMap animalsPark = new RectangularMap(4,4);
 
-        Simulation simulation = new Simulation(positions, directions);
+        Simulation simulation = new Simulation(positions, directions, animalsPark);
         simulation.run();
 
-//        List <MoveDirection> directions = directionParser(args);
-//        run(directions);
-
+        run(directions);
         System.out.println("System zakończył działanie");
 
 
