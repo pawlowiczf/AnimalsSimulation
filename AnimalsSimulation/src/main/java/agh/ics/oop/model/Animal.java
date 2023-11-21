@@ -33,7 +33,7 @@ public class Animal {
         return this.position.equals(position);
     }
 
-    public void move(MoveDirection direction, MoveValidator validator) {
+    public void move(MoveDirection direction, MoveValidator <Vector2d> validator) {
         //
         switch(direction) {
             case RIGHT    -> orientation = orientation.next();
