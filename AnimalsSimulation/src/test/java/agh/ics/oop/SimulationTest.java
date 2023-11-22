@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SimulationTest {
     //
-
     @Test
     public void doesInputMatchAnimalsMoves() {
         // given
@@ -26,7 +25,7 @@ class SimulationTest {
 
         List <MoveDirection> directions = new ArrayList<>
                 (
-                Arrays.asList( MoveDirection.FORWARD, MoveDirection.FORWARD, MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.RIGHT, MoveDirection.FORWARD, MoveDirection.LEFT, MoveDirection.BACKWARD)
+                Arrays.asList( MoveDirection.FORWARD, MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.RIGHT, MoveDirection.LEFT, MoveDirection.BACKWARD)
                 ) ;
 
         Simulation simulation = new Simulation(positions, directions, animalsPark);
@@ -41,9 +40,9 @@ class SimulationTest {
         List <Animal> animals = simulation.getAnimalsList();
 
         // then
-        for(int idx = 0 ; idx < 3 ; idx++ ) {
-            assertTrue( animals.get(idx).isAt( newPositions.get(idx) ) );
-        }
+
+        assertEquals( newPosA, animals.get(0).getPosition() );
+        assertEquals( newPosB, animals.get(1).getPosition()  );
 
     }
 

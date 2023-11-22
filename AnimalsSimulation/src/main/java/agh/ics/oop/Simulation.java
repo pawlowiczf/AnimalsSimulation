@@ -19,8 +19,9 @@ public class Simulation {
 
         for( Vector2d position : positions ) {
             //
-            animalsPark.place( new Animal( position.getX(), position.getY() ) );
-            this.animals.add(  new Animal( position.getX(), position.getY() ) );
+            if ( animalsPark.place( new Animal( position.getX(), position.getY() ) ) ) {
+                this.animals.add(  new Animal( position.getX(), position.getY() ) );
+            }
         }
     } // constructor
 
