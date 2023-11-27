@@ -39,7 +39,7 @@ public class World {
         positions.add( new Vector2d(3, 2 ) );
         positions.add( new Vector2d(0,0  ) );
 //        RectangularMap animalsPark = new RectangularMap(4,4);
-        GrassField animalsPark = new GrassField(5);
+        GrassField animalsPark = new GrassField(10);
         Simulation simulation = new Simulation(positions, directions, animalsPark);
         simulation.run();
 

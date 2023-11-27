@@ -1,8 +1,10 @@
 package agh.ics.oop.model;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import agh.ics.oop.model.util.MapVisualizer;
+import agh.ics.oop.model.util.RandomPositionGenerator;
 
 public class GrassField extends AbstractWorldMap{
     //
@@ -20,20 +22,29 @@ public class GrassField extends AbstractWorldMap{
         yMax = xMax = borderGrass;
         yMin = xMin = -borderGrass;
 
-        int grassPutOnMap = 0;
+        RandomPositionGenerator randomPositionGenerator = new RandomPositionGenerator(borderGrass, borderGrass, numberOfGrassFields);
+        Iterator<Vector2d> positionsIterator = randomPositionGenerator.iterator();
 
-        while (grassPutOnMap < numberOfGrassFields ) {
-            //
-            int randomX = (int) Math.floor( Math.random() * ( borderGrass + 1) );
-            int randomY = (int) Math.floor( Math.random() * ( borderGrass + 1) );
-            Vector2d newGrassLocation = new Vector2d(randomX, randomY);
+        while (positionsIterator.hasNext()) {
+            Vector2d pos = positionsIterator.next();
+            grassLocation.put(pos, new Grass(pos));
+        }
 
-            if ( !grassLocation.containsKey( newGrassLocation ) )  {
-                grassLocation.put( newGrassLocation, new Grass( newGrassLocation ) );
-                updateBorderOfMap(newGrassLocation);
-                grassPutOnMap++;
-            }
-        } // end 'while' loop
+
+//        int grassPutOnMap = 0;
+//
+//        while (grassPutOnMap < numberOfGrassFields ) {
+//            //
+//            int randomX = (int) Math.floor( Math.random() * ( borderGrass + 1) );
+//            int randomY = (int) Math.floor( Math.random() * ( borderGrass + 1) );
+//            Vector2d newGrassLocation = new Vector2d(randomX, randomY);
+//
+//            if ( !grassLocation.containsKey( newGrassLocation ) )  {
+//                grassLocation.put( newGrassLocation, new Grass( newGrassLocation ) );
+//                updateBorderOfMap(newGrassLocation);
+//                grassPutOnMap++;
+//            }
+//        } // end 'while' loop
     } // constructor
 
     private void updateBorderOfMap(Vector2d locationOfObject) {
