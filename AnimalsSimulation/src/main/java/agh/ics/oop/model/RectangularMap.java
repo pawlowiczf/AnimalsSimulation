@@ -3,32 +3,17 @@ import agh.ics.oop.model.util.MapVisualizer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RectangularMap implements WorldMap {
+public class RectangularMap extends AbstractWorldMap {
     //
     private final int width;
     private final int height;
-    private final Map <Vector2d, Animal> animals = new HashMap<>();
 
     public RectangularMap(int width, int height) {
+        super();
         this.width  = width;
         this.height = height;
     } // constructor
 
-    @Override
-    public void move(Animal animal, MoveDirection direction) {
-        //
-        if ( animals.containsKey( animal.getPosition() ) ) {
-            // sytuacja, gdy zwierzę jest na mapie
-
-            animals.remove( animal.getPosition() );
-
-            // jeśli jakieś zwierzę jest już na polu, na które chcemy przenieść naszego aktualnego
-            // zwierzaka, to metoda move() nic nie zmieni.
-            animal.move(direction, this);
-
-            animals.put( animal.getPosition(), animal );
-        }
-    } // end method move()
 
     @Override
     public boolean place(Animal animal) {
@@ -40,18 +25,17 @@ public class RectangularMap implements WorldMap {
 
         return false;
     }
-
     @Override
     public boolean canMoveTo(Vector2d position) {
         //
-        if ( isOccupied(position) ) { return false; }
-
-        return position.precedes( new Vector2d(width, height) ) && position.follow( new Vector2d(0, 0) );
+        if ( super.canMoveTo(position) ){
+            return position.precedes( new Vector2d(width, height) ) && position.follow( new Vector2d(0, 0) );
+        }
+        return false;
     }
-
     @Override
     public boolean isOccupied(Vector2d position) {
-        return this.animals.containsKey(position);
+        return super.isOccupied(position);
     }
 
     @Override

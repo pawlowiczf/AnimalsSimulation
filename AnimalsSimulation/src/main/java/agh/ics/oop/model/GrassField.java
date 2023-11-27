@@ -2,17 +2,24 @@ package agh.ics.oop.model;
 
 import java.util.HashMap;
 import java.util.Map;
+import agh.ics.oop.model.util.MapVisualizer;
 
-public class GrassField implements WorldMap {
+public class GrassField extends AbstractWorldMap{
     //
     private final int numberOfGrassFields;
     private final Map <Vector2d, Grass> grassLocation = new HashMap<>();
-    private final Map <Vector2d, Animal> animals = new HashMap<>();
+
+    int yMax, yMin, xMax, xMin;
 
     public GrassField(int numberOfGrassFields) {
+        //
+        super();
         this.numberOfGrassFields = numberOfGrassFields;
 
         int borderGrass = (int) Math.sqrt( numberOfGrassFields * 10 );
+        yMax = xMax = borderGrass;
+        yMin = xMin = -borderGrass;
+
         int grassPutOnMap = 0;
 
         while (grassPutOnMap < numberOfGrassFields ) {
@@ -23,22 +30,31 @@ public class GrassField implements WorldMap {
 
             if ( !grassLocation.containsKey( newGrassLocation ) )  {
                 grassLocation.put( newGrassLocation, new Grass( newGrassLocation ) );
+                updateBorderOfMap(newGrassLocation);
                 grassPutOnMap++;
             }
         } // end 'while' loop
+    } // constructor
+
+    private void updateBorderOfMap(Vector2d locationOfObject) {
+        //
+        this.yMax = Math.max( yMax, locationOfObject.getY() );
+        this.yMin = Math.min( yMin, locationOfObject.getY() );
+        this.xMax = Math.max( xMax, locationOfObject.getX() );
+        this.xMin = Math.min( xMin, locationOfObject.getX() );
     }
 
     @Override
     public boolean canMoveTo(Vector2d position) {
         //
-        return !isOccupied(position);
+        return super.canMoveTo(position);
     }
 
     @Override
     public boolean place(Animal animal) {
         //
-        if ( canMoveTo( animal.getPosition() ) ) {
-            animals.put( animal.getPosition(), animal );
+        if ( super.place(animal) ) {
+            updateBorderOfMap( animal.getPosition() );
             return true;
         }
         return false;
@@ -47,26 +63,33 @@ public class GrassField implements WorldMap {
     @Override
     public void move(Animal animal, MoveDirection direction) {
         //
-        if ( animals.containsKey( animal.getPosition() ) ) {
-            animals.remove( animal.getPosition() );
-            animal.move(direction, this);
-            animals.put( animal.getPosition(), animal );
-        }
+        super.move(animal, direction);
+        updateBorderOfMap( animal.getPosition() );
     }
 
     @Override
     public boolean isOccupied(Vector2d position) {
-        return animals.containsKey(position);
+        return super.isOccupied(position) || grassLocation.containsKey(position);
     }
 
     @Override
     public WorldElement objectAt(Vector2d position) {
         //
-        if ( isOccupied(position) ) {
+        if ( super.isOccupied(position) ) {
             return this.animals.get( position );
         }
+
+        else if ( grassLocation.containsKey(position) ) {
+            return this.grassLocation.get( position );
+        }
+
         return null;
     }
     //
 
+    @Override
+    public String toString() {
+        MapVisualizer visualizer = new MapVisualizer(this);
+        return visualizer.draw( new Vector2d(xMin, yMin), new Vector2d(xMax, yMax) );
+    }
 }
