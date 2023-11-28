@@ -41,4 +41,6 @@ public abstract class AbstractWorldMap implements WorldMap{
         //
         return !isOccupied(position);
     }
+
+
 }

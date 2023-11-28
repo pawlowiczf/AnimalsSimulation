@@ -87,7 +87,7 @@ public class GrassField extends AbstractWorldMap{
     public WorldElement objectAt(Vector2d position) {
         //
         if ( super.isOccupied(position) ) {
-            return this.animals.get( position );
+            return animals.get( position );
         }
 
         else if ( grassLocation.containsKey(position) ) {
