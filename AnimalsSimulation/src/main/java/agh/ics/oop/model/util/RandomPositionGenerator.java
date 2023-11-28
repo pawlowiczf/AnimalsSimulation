@@ -13,8 +13,8 @@ public class RandomPositionGenerator implements Iterable<Vector2d>{
     private final ArrayList<Integer> arrayGenerator;
 
     public RandomPositionGenerator(int maxWidth, int maxHeight, int grassCount) {
-        this.maxWidth = maxWidth;
-        this.maxHeight = maxHeight;
+        this.maxWidth = (int) Math.sqrt( maxWidth * 10 );
+        this.maxHeight = (int) Math.sqrt( maxHeight * 10 );
         this.grassCount = grassCount;
 
         this.arrayGenerator = new ArrayList<>();
@@ -38,7 +38,7 @@ public class RandomPositionGenerator implements Iterable<Vector2d>{
         @Override
         public Vector2d next() {
             //
-            int randomIndex = (int) Math.floor( Math.random() * ( arrayGenerator.size() + 1) );
+            int randomIndex = (int) Math.floor( Math.random() * ( arrayGenerator.size() ) );
             int xCoord = ( arrayGenerator.get(randomIndex) / maxHeight );
             int yCoord = ( arrayGenerator.get(randomIndex) % maxWidth );
             arrayGenerator.remove( randomIndex );
