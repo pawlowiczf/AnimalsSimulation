@@ -25,12 +25,11 @@ public class GrassField extends AbstractWorldMap{
         RandomPositionGenerator randomPositionGenerator = new RandomPositionGenerator(borderGrass, borderGrass, numberOfGrassFields);
         Iterator<Vector2d> positionsIterator = randomPositionGenerator.iterator();
 
-        while (positionsIterator.hasNext()) {
-            Vector2d pos = positionsIterator.next();
-            grassLocation.put(pos, new Grass(pos));
+        for(Vector2d grassPosition : randomPositionGenerator) {
+            grassLocation.put(grassPosition, new Grass(grassPosition));
         }
 
-
+        // Stara naiwna-wersja generowania pozycji trawy:
 //        int grassPutOnMap = 0;
 //
 //        while (grassPutOnMap < numberOfGrassFields ) {
@@ -45,6 +44,7 @@ public class GrassField extends AbstractWorldMap{
 //                grassPutOnMap++;
 //            }
 //        } // end 'while' loop
+
     } // constructor
 
     private void updateBorderOfMap(Vector2d locationOfObject) {
@@ -96,7 +96,6 @@ public class GrassField extends AbstractWorldMap{
 
         return null;
     }
-    //
 
     @Override
     public String toString() {
