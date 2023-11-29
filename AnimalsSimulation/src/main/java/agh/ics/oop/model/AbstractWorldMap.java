@@ -42,5 +42,6 @@ public abstract class AbstractWorldMap implements WorldMap{
         return !isOccupied(position);
     }
 
+    public abstract Boundary getCurrentBounds();
 
 }

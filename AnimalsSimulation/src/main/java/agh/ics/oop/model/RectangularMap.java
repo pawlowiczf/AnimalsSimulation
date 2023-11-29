@@ -53,6 +53,11 @@ public class RectangularMap extends AbstractWorldMap {
         return visualizer.draw(new Vector2d(0, 0), new Vector2d(width, height) );
     }
 
+    public Boundary getCurrentBounds() {
+        //
+        return new Boundary( new Vector2d(0,0), new Vector2d(width, height) );
+    }
+
     public Map<Vector2d, Animal> getAnimals() {
         return animals;
     }
