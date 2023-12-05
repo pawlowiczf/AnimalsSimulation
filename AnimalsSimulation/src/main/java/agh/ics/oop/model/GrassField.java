@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -42,6 +43,15 @@ public class GrassField extends AbstractWorldMap{
     }
 
     @Override
+    public ArrayList<WorldElement> getElements() {
+        //
+        ArrayList <WorldElement> elementsOnMap = new ArrayList<>( super.getElements() );
+        elementsOnMap.addAll( grassLocation.values() );
+
+        return elementsOnMap;
+    }
+
+    @Override
     public WorldElement objectAt(Vector2d position) {
         //
         if ( super.isOccupied(position) ) {
@@ -55,10 +65,23 @@ public class GrassField extends AbstractWorldMap{
         return null;
     }
 
+    private Boundary getBorderOfMap() {
+        //
+        ArrayList <WorldElement> elementsOnMap = getElements();
+        Vector2d lowerBorder  = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        Vector2d upperBorder = new Vector2d(Integer.MIN_VALUE, Integer.MIN_VALUE);
+
+        for (WorldElement element : elementsOnMap) {
+            lowerBorder = lowerBorder.lowerLeft(  element.getPosition() );
+            upperBorder = upperBorder.upperRight( element.getPosition() );
+        }
+
+        return new Boundary(lowerBorder, upperBorder);
+    }
+
     @Override
     public Boundary getCurrentBounds() {
-        getBorderOfMap()
-        return
+        return getBorderOfMap();
     }
 
     @Override

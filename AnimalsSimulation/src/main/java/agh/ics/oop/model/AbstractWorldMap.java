@@ -2,6 +2,8 @@ package agh.ics.oop.model;
 
 import agh.ics.oop.model.util.PositionAlreadyOccupiedException;
 
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,6 +44,10 @@ public abstract class AbstractWorldMap implements WorldMap{
     public boolean canMoveTo(Vector2d position) {
         //
         return !isOccupied(position);
+    }
+
+    public ArrayList<WorldElement> getElements() {
+        return new ArrayList <> ( animals.values() );
     }
 
     public abstract Boundary getCurrentBounds();
