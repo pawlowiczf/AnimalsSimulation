@@ -24,7 +24,7 @@ public class Simulation {
                 animalsPark.place( new Animal( position.getX(), position.getY() ) );
                 this.animals.add(  new Animal( position.getX(), position.getY() ) );
             } catch (PositionAlreadyOccupiedException ignored) {
-
+                System.out.println( "Position (%d, %d) is occupied - the animal wasn't added".formatted( position.getX(), position.getY() ) );
             }
 
         }
@@ -45,7 +45,6 @@ public class Simulation {
             animalsPark.move( currentAnimal, direction );
 
             index += 1;
-            System.out.println( animalsPark );
         } // end 'for each' loop
 
     } // end 'run' method
