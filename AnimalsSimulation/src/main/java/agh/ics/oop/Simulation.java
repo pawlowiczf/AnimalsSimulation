@@ -3,6 +3,7 @@ import agh.ics.oop.model.Animal;
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.WorldMap;
+import agh.ics.oop.model.util.PositionAlreadyOccupiedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +20,13 @@ public class Simulation {
 
         for( Vector2d position : positions ) {
             //
-            if ( animalsPark.place( new Animal( position.getX(), position.getY() ) ) ) {
+            try {
+                animalsPark.place( new Animal( position.getX(), position.getY() ) );
                 this.animals.add(  new Animal( position.getX(), position.getY() ) );
+            } catch (PositionAlreadyOccupiedException ignored) {
+
             }
+
         }
     } // constructor
 

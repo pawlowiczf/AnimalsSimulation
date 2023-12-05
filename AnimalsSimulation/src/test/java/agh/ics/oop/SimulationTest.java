@@ -75,7 +75,7 @@ class SimulationTest {
     @Test
     public void fullIntegrationTest() {
         // given
-        String[] args = {"f", "b", "r", "L", "l", "f", "f", "f", "b", "b"};
+        String[] args = {"f", "b", "r", "l", "l", "f", "f", "f", "b", "b"};
         List <MoveDirection> directions = directionParser(args);
         List <Vector2d> startingPositions = new ArrayList<>
                 (
@@ -87,8 +87,8 @@ class SimulationTest {
 
         // when
         simulation.run();
-        Vector2d posA = new Vector2d(4, 6);
-        Vector2d posB = new Vector2d(4, 0);
+        Vector2d posA = new Vector2d(5, 6);
+        Vector2d posB = new Vector2d(3, 0);
         Vector2d posC = new Vector2d(6, 8);
         List <Vector2d> newPositions = new ArrayList<>( Arrays.asList( posA, posB, posC ) );
         List <Animal> listOfAnimals = simulation.getAnimalsList();
@@ -102,7 +102,7 @@ class SimulationTest {
 
         // Check, whether orientations are correct.
         assertEquals( MapDirection.WEST, listOfAnimals.get(0).getOrientation() );
-        assertEquals( MapDirection.NORTH, listOfAnimals.get(1).getOrientation() );
+        assertEquals( MapDirection.WEST, listOfAnimals.get(1).getOrientation() );
         assertEquals( MapDirection.EAST, listOfAnimals.get(2).getOrientation() );
 
 

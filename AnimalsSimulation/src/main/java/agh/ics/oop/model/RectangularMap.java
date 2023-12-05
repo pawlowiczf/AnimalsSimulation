@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 import agh.ics.oop.model.util.MapVisualizer;
+import agh.ics.oop.model.util.PositionAlreadyOccupiedException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,15 +18,16 @@ public class RectangularMap extends AbstractWorldMap {
 
 
     @Override
-    public boolean place(Animal animal) {
+    public void place(Animal animal) throws PositionAlreadyOccupiedException {
         //
         if ( this.canMoveTo( animal.getPosition() ) ) {
             animals.put( animal.getPosition(), animal );
-            return true;
         }
-
-        return false;
+        else {
+            throw new PositionAlreadyOccupiedException( animal.getPosition() );
+        }
     }
+
     @Override
     public boolean canMoveTo(Vector2d position) {
         //

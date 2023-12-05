@@ -8,51 +8,20 @@ import agh.ics.oop.model.util.RandomPositionGenerator;
 
 public class GrassField extends AbstractWorldMap{
     //
-    private final int numberOfGrassFields;
     private final Map <Vector2d, Grass> grassLocation = new HashMap<>();
-
-    int yMax, yMin, xMax, xMin;
+    private Boundary mapBoundary;
 
     public GrassField(int numberOfGrassFields) {
         //
         super();
-        this.numberOfGrassFields = numberOfGrassFields;
-
-        int borderGrass = (int) Math.sqrt( numberOfGrassFields * 10 );
-        yMax = xMax = borderGrass;
-        yMin = xMin = -borderGrass;
+        int borderGrass = (int) Math.sqrt(numberOfGrassFields * 10);
 
         RandomPositionGenerator randomPositionGenerator = new RandomPositionGenerator(borderGrass, borderGrass, numberOfGrassFields);
         Iterator<Vector2d> positionsIterator = randomPositionGenerator.iterator();
 
-        for(Vector2d grassPosition : randomPositionGenerator) {
+        for (Vector2d grassPosition : randomPositionGenerator) {
             grassLocation.put(grassPosition, new Grass(grassPosition));
         }
-
-        // Stara naiwna-wersja generowania pozycji trawy:
-//        int grassPutOnMap = 0;
-//
-//        while (grassPutOnMap < numberOfGrassFields ) {
-//            //
-//            int randomX = (int) Math.floor( Math.random() * ( borderGrass + 1) );
-//            int randomY = (int) Math.floor( Math.random() * ( borderGrass + 1) );
-//            Vector2d newGrassLocation = new Vector2d(randomX, randomY);
-//
-//            if ( !grassLocation.containsKey( newGrassLocation ) )  {
-//                grassLocation.put( newGrassLocation, new Grass( newGrassLocation ) );
-//                updateBorderOfMap(newGrassLocation);
-//                grassPutOnMap++;
-//            }
-//        } // end 'while' loop
-
-    } // constructor
-
-    private void updateBorderOfMap(Vector2d locationOfObject) {
-        //
-        this.yMax = Math.max( yMax, locationOfObject.getY() );
-        this.yMin = Math.min( yMin, locationOfObject.getY() );
-        this.xMax = Math.max( xMax, locationOfObject.getX() );
-        this.xMin = Math.min( xMin, locationOfObject.getX() );
     }
 
     @Override
@@ -62,20 +31,9 @@ public class GrassField extends AbstractWorldMap{
     }
 
     @Override
-    public boolean place(Animal animal) {
-        //
-        if ( super.place(animal) ) {
-            updateBorderOfMap( animal.getPosition() );
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public void move(Animal animal, MoveDirection direction) {
         //
         super.move(animal, direction);
-        updateBorderOfMap( animal.getPosition() );
     }
 
     @Override
@@ -95,6 +53,12 @@ public class GrassField extends AbstractWorldMap{
         }
 
         return null;
+    }
+
+    @Override
+    public Boundary getCurrentBounds() {
+        getBorderOfMap()
+        return
     }
 
     @Override

@@ -20,9 +20,8 @@ public class OptionsParser
             };
 
             directions.add(result);
-            }
+        } // end 'for each' loop
 
-        // end 'for each' loop
         return directions;
     }
 }

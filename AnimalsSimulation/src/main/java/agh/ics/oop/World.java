@@ -33,7 +33,9 @@ public class World {
         List<MoveDirection> directions;
         List<Vector2d> positions;
 
-        directions = directionParser(args);
+
+        directions = directionParser(args); // nieobsłużenie wyjątku; program się zakończy
+
         positions = new ArrayList<>();
         positions.add( new Vector2d(2, 2 ) );
         positions.add( new Vector2d(3, 2 ) );
