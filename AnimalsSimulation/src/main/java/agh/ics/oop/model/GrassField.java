@@ -84,9 +84,4 @@ public class GrassField extends AbstractWorldMap{
         return getBorderOfMap();
     }
 
-    @Override
-    public String toString() {
-        MapVisualizer visualizer = new MapVisualizer(this);
-        return visualizer.draw( new Vector2d(xMin, yMin), new Vector2d(xMax, yMax) );
-    }
 }

@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.util.MapVisualizer;
 import agh.ics.oop.model.util.PositionAlreadyOccupiedException;
 
 import java.sql.Array;
@@ -10,7 +11,7 @@ import java.util.Map;
 public abstract class AbstractWorldMap implements WorldMap{
     //
     protected Map<Vector2d, Animal> animals = new HashMap<>();
-
+    private MapVisualizer visualizer;
     protected AbstractWorldMap() {
 
     } // empty constructor - jak go nie dodam to wywala mi błąd w GrassField!
@@ -52,4 +53,9 @@ public abstract class AbstractWorldMap implements WorldMap{
 
     public abstract Boundary getCurrentBounds();
 
+    @Override
+    public String toString() {
+        Boundary mapBorder = getCurrentBounds();
+        return visualizer.draw( mapBorder.leftBorder(), mapBorder.rightBorder() );
+    }
 }

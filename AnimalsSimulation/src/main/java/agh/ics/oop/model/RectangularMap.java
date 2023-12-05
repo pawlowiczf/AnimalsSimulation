@@ -50,12 +50,6 @@ public class RectangularMap extends AbstractWorldMap {
         return null;
     }
 
-    @Override
-    public String toString() {
-        MapVisualizer visualizer = new MapVisualizer(this);
-        return visualizer.draw(new Vector2d(0, 0), new Vector2d(width, height) );
-    }
-
     public Boundary getCurrentBounds() {
         //
         return new Boundary( new Vector2d(0,0), new Vector2d(width, height) );
