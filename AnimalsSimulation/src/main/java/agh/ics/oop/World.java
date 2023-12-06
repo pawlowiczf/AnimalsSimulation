@@ -33,19 +33,26 @@ public class World {
         List<MoveDirection> directions;
         List<Vector2d> positions;
 
-        directions = directionParser(args);
+        directions = directionParser(args); // nieobsłużenie wyjątku; program się zakończy
+
         positions = new ArrayList<>();
         positions.add( new Vector2d(2, 2 ) );
         positions.add( new Vector2d(3, 2 ) );
         positions.add( new Vector2d(0,0  ) );
 //        RectangularMap animalsPark = new RectangularMap(10,10);
+
         GrassField animalsPark = new GrassField(10);
+
+        ConsoleMapDisplay subscriber = new ConsoleMapDisplay();
+        animalsPark.addSubscriber(subscriber);
+
         Simulation simulation = new Simulation(positions, directions, animalsPark);
         simulation.run();
 
-        run(directions);
-        System.out.println("System zakończył działanie");
 
+
+//        run(directions);
+        System.out.println("System zakończył działanie");
 
     }
 

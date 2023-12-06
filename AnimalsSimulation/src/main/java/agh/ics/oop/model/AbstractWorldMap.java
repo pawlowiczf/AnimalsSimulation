@@ -1,36 +1,54 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.util.MapVisualizer;
+import agh.ics.oop.model.util.PositionAlreadyOccupiedException;
+
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class AbstractWorldMap implements WorldMap{
     //
     protected Map<Vector2d, Animal> animals = new HashMap<>();
+    private final MapVisualizer visualizer;
+    private final ArrayList <MapChangeListener> subscribers = new ArrayList<>(); // Lista subskrybentów, tj. lista obserwatorów.
 
     protected AbstractWorldMap() {
-
-    } // default, empty constructor
-
+        this.visualizer = new MapVisualizer(this);
+    } // empty constructor - jak go nie dodam, to wywala mi błąd w 'GrassField'!
     protected AbstractWorldMap( Map<Vector2d, Animal> animals) {
+        //
+        this.visualizer = new MapVisualizer(this);
         this.animals = animals;
-    }
+    } // constructor
 
     public void move(Animal animal, MoveDirection direction) {
         //
         if ( animals.containsKey( animal.getPosition() ) ) {
+            //
+            Vector2d oldPosition = animal.getPosition();
+
             animals.remove( animal.getPosition() );
             animal.move(direction, this);
             animals.put( animal.getPosition(), animal );
-        }
-    }
 
-    public boolean place(Animal animal) {
+            if ( ! animal.getPosition().equals(oldPosition) ) {
+                mapChanged( "Animal changed its position!");
+            }
+
+        } // end 'if' clause
+    } // end 'move' method
+
+    public void place(Animal animal) throws PositionAlreadyOccupiedException {
         //
         if ( canMoveTo( animal.getPosition() ) ) {
             animals.put( animal.getPosition(), animal );
-            return true;
+            mapChanged( "Animal was added to the map!");
         }
-        return false;
+        else {
+            throw new PositionAlreadyOccupiedException( animal.getPosition() );
+        }
     }
 
     public boolean isOccupied(Vector2d position) {
@@ -42,5 +60,30 @@ public abstract class AbstractWorldMap implements WorldMap{
         return !isOccupied(position);
     }
 
+    public ArrayList<WorldElement> getElements() {
+        return new ArrayList <> ( animals.values() );
+    }
 
+    public abstract Boundary getCurrentBounds();
+
+    @Override
+    public String toString() {
+        Boundary mapBorder = getCurrentBounds();
+        return visualizer.draw( mapBorder.leftBorder(), mapBorder.rightBorder() );
+    }
+
+    public void mapChanged(String message) {
+        //
+        for( MapChangeListener subscriber : subscribers ) {
+            subscriber.mapChanged(this, message);
+        }
+    }
+
+    public void addSubscriber(MapChangeListener subscriber) {
+        this.subscribers.add( subscriber );
+    }
+
+    public void removeSubscriber(MapChangeListener subscriber) {
+        this.subscribers.remove( subscriber );
+    }
 }

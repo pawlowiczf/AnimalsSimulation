@@ -1,6 +1,8 @@
 package agh.ics.oop;
 import agh.ics.oop.model.MoveDirection;
 import static agh.ics.oop.OptionsParser.directionParser;
+
+import agh.ics.oop.model.util.PositionAlreadyOccupiedException;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,47 +15,29 @@ class OptionsParserTest {
     @Test
     public void doesDirectionParserWork() {
         // given
-        String[] argumentsA = {"f", "X", "K", "r", "l"};
-        String[] argumentsB = {};
-        String[] argumentsC = {"0", "NIE MAM", "HEJKA", "FLP", "GRY"};
+        String[] argumentsA = {"f", "X", "r", "r", "l"};
+        String[] argumentsB = {"gwiazda", "l", "r", "b"};
+        String[] argumentsC = {"r", "r", "l", "f", "meteor"};
+        String[] argumentsD = {"r", "r", "l", "f"};
+
 
         // when
-        List <MoveDirection> directionsA       = directionParser(argumentsA);
-        List<MoveDirection> properDirectionsA = new ArrayList<>( Arrays.asList(MoveDirection.FORWARD, MoveDirection.RIGHT, MoveDirection.LEFT) );
+        List <MoveDirection> properDirectionsD = new ArrayList<>( Arrays.asList(MoveDirection.RIGHT, MoveDirection.RIGHT, MoveDirection.LEFT, MoveDirection.FORWARD) );
 
-        List <MoveDirection> directionsB       = directionParser(argumentsB);
-        List <MoveDirection> properDirectionsB = new ArrayList<>();
-
-        List <MoveDirection> directionsC       = directionParser(argumentsC);
-        List <MoveDirection> properDirectionsC = new ArrayList<>();
+        IllegalArgumentException exceptionA = assertThrows(IllegalArgumentException.class, () -> OptionsParser.directionParser(argumentsA) );
+        IllegalArgumentException exceptionB = assertThrows(IllegalArgumentException.class, () -> OptionsParser.directionParser(argumentsB) );
+        IllegalArgumentException exceptionC = assertThrows(IllegalArgumentException.class, () -> OptionsParser.directionParser(argumentsC) );
 
         // then
-        assertEquals(directionsA, properDirectionsA);
-        assertEquals(directionsB, properDirectionsB);
-        assertEquals(directionsC, properDirectionsC);
+
+        assertEquals("X is not legal move specification",       exceptionA.getMessage() );
+        assertEquals("gwiazda is not legal move specification", exceptionB.getMessage() );
+        assertEquals("meteor is not legal move specification",  exceptionC.getMessage() );
+
+        assertEquals(properDirectionsD, directionParser(argumentsD));
+
+
     }
 
-    @Test
-    public void doesDirectionParserWorkWithMixedInputs() {
-        // given
-        String[] argumentsA = {"Tu byłby", "raj", "f", "b", "gdybyś", "l"};
-        String[] argumentsB = {"Znasz li", "f", "ten kraj", "l", "r", "gdzie"};
-        String[] argumentsC = {"Szukam", "północnej", "fg?", "gwiazdy", "l", "l", "l", "l", "r" };
-
-        // when
-        List <MoveDirection> directionsA       = directionParser(argumentsA);
-        ArrayList <MoveDirection> properDirectionsA = new ArrayList<>( Arrays.asList(MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.LEFT) );
-
-        List <MoveDirection> directionsB       = directionParser(argumentsB);
-        List <MoveDirection> properDirectionsB = new ArrayList<>( Arrays.asList(MoveDirection.FORWARD, MoveDirection.LEFT, MoveDirection.RIGHT) );
-
-        List <MoveDirection> directionsC       = directionParser(argumentsC);
-        List <MoveDirection> properDirectionsC = new ArrayList<>( Arrays.asList(MoveDirection.LEFT, MoveDirection.LEFT, MoveDirection.LEFT, MoveDirection.LEFT, MoveDirection.RIGHT) );
-
-        // then
-        assertEquals(directionsA, properDirectionsA);
-        assertEquals(directionsB, properDirectionsB);
-        assertEquals(directionsC, properDirectionsC);
-    }
 
 }
