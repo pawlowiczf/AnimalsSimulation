@@ -23,7 +23,7 @@ public class Simulation {
             try {
                 animalsPark.place( new Animal( position.getX(), position.getY() ) );
                 this.animals.add(  new Animal( position.getX(), position.getY() ) );
-            } catch (PositionAlreadyOccupiedException ignored) {
+            } catch (PositionAlreadyOccupiedException exception) {
                 System.out.println( "Position (%d, %d) is occupied - the animal wasn't added".formatted( position.getX(), position.getY() ) );
             }
 

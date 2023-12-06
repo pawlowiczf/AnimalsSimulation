@@ -10,17 +10,20 @@ import java.util.Map;
 
 public abstract class AbstractWorldMap implements WorldMap{
     //
-    protected Map<Vector2d, Animal> animals = new HashMap<>();
+    private final int mapId;
+    protected Map<Vector2d, Animal> animals;
     private final MapVisualizer visualizer;
     private final ArrayList <MapChangeListener> subscribers = new ArrayList<>(); // Lista subskrybentów, tj. lista obserwatorów.
 
-    protected AbstractWorldMap() {
-        this.visualizer = new MapVisualizer(this);
+    protected AbstractWorldMap(int mapId) {
+        this(mapId, new HashMap<>());
     } // empty constructor - jak go nie dodam, to wywala mi błąd w 'GrassField'!
-    protected AbstractWorldMap( Map<Vector2d, Animal> animals) {
+
+    protected AbstractWorldMap( int mapId, Map<Vector2d, Animal> animals) {
         //
         this.visualizer = new MapVisualizer(this);
         this.animals = animals;
+        this.mapId   = mapId;
     } // constructor
 
     public void move(Animal animal, MoveDirection direction) {
@@ -72,7 +75,7 @@ public abstract class AbstractWorldMap implements WorldMap{
         return visualizer.draw( mapBorder.leftBorder(), mapBorder.rightBorder() );
     }
 
-    public void mapChanged(String message) {
+    private void mapChanged(String message) {
         //
         for( MapChangeListener subscriber : subscribers ) {
             subscriber.mapChanged(this, message);
@@ -85,5 +88,10 @@ public abstract class AbstractWorldMap implements WorldMap{
 
     public void removeSubscriber(MapChangeListener subscriber) {
         this.subscribers.remove( subscriber );
+    }
+
+    @Override
+    public int getId() {
+        return this.mapId;
     }
 }
