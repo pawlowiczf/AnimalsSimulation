@@ -62,7 +62,8 @@ public class World {
 
         SimulationEngine simulationEngine = new SimulationEngine( simulationList );
 //        simulationEngine.runSync();
-        simulationEngine.runAsync();
+//        simulationEngine.runAsync();
+        simulationEngine.runAsyncInThreadPool();
 
 
         System.out.println("System zakonczyl dzialanie");
