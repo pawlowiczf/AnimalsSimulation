@@ -16,7 +16,7 @@ class SimulationTest {
     @Test
     public void doesInputMatchAnimalsMoves() {
         // given
-        RectangularMap animalsPark = new RectangularMap(4, 4);
+        RectangularMap animalsPark = new RectangularMap(1, 4,4);
         Vector2d posA = new Vector2d(2,2);
         Vector2d posB = new Vector2d(1,1);
         Vector2d posC = new Vector2d(-1, 1);
@@ -56,7 +56,7 @@ class SimulationTest {
                 Arrays.asList( MoveDirection.RIGHT, MoveDirection.FORWARD)
                 );
 
-        RectangularMap animalsPark = new RectangularMap(11, 11);
+        RectangularMap animalsPark = new RectangularMap(1, 11, 11);
         List <Vector2d> positions = new ArrayList<>( Arrays.asList(posA, posB) );
         Simulation simulation = new Simulation(positions, directions, animalsPark);
 
@@ -82,7 +82,7 @@ class SimulationTest {
                 Arrays.asList( new Vector2d(5, 5), new Vector2d(4,1), new Vector2d(6, 8) )
                 );
 
-        RectangularMap animalsPark = new RectangularMap(10, 10);
+        RectangularMap animalsPark = new RectangularMap(1, 10, 10);
         Simulation simulation = new Simulation(startingPositions, directions, animalsPark);
 
         // when
