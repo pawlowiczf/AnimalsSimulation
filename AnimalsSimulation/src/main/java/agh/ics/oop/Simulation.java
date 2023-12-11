@@ -8,7 +8,7 @@ import agh.ics.oop.model.util.PositionAlreadyOccupiedException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Simulation {
+public class Simulation implements Runnable {
     //
     private final List <MoveDirection> directions;
     private final List <Animal> animals = new ArrayList<>();
@@ -32,6 +32,7 @@ public class Simulation {
 
     // Methods:
 
+    @Override
     public void run() {
         //
         int numberOfAnimals = this.animals.size();

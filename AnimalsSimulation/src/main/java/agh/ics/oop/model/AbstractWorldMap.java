@@ -47,7 +47,7 @@ public abstract class AbstractWorldMap implements WorldMap{
         //
         if ( canMoveTo( animal.getPosition() ) ) {
             animals.put( animal.getPosition(), animal );
-            mapChanged( "Animal was added to the map!");
+            mapChanged( "Animal was added to the map!" );
         }
         else {
             throw new PositionAlreadyOccupiedException( animal.getPosition() );
