@@ -8,7 +8,7 @@ import agh.ics.oop.model.util.PositionAlreadyOccupiedException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Simulation {
+public class Simulation implements Runnable {
     //
     private final List <MoveDirection> directions;
     private final List <Animal> animals = new ArrayList<>();
@@ -23,7 +23,7 @@ public class Simulation {
             try {
                 animalsPark.place( new Animal( position.getX(), position.getY() ) );
                 this.animals.add(  new Animal( position.getX(), position.getY() ) );
-            } catch (PositionAlreadyOccupiedException ignored) {
+            } catch (PositionAlreadyOccupiedException exception) {
                 System.out.println( "Position (%d, %d) is occupied - the animal wasn't added".formatted( position.getX(), position.getY() ) );
             }
 
@@ -32,6 +32,7 @@ public class Simulation {
 
     // Methods:
 
+    @Override
     public void run() {
         //
         int numberOfAnimals = this.animals.size();

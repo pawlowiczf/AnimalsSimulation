@@ -12,9 +12,9 @@ public class GrassField extends AbstractWorldMap{
     private final Map <Vector2d, Grass> grassLocation = new HashMap<>();
     private Boundary mapBoundary;
 
-    public GrassField(int numberOfGrassFields) {
+    public GrassField(int mapId, int numberOfGrassFields) {
         //
-        super();
+        super(mapId);
         int borderGrass = (int) Math.sqrt(numberOfGrassFields * 10);
 
         RandomPositionGenerator randomPositionGenerator = new RandomPositionGenerator(borderGrass, borderGrass, numberOfGrassFields);

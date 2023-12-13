@@ -24,7 +24,7 @@ class AnimalTest {
     @Test
     public void doesAnimalMoveProperlyOnBoard() {
         // given
-        MoveValidator validator = new RectangularMap(4,4);
+        MoveValidator validator = new RectangularMap(4,4, 4);
         Animal animalA = new Animal(3, 4);
         Animal animalB = new Animal(5, 5);
         Animal animalC = new Animal(-3, -3);
@@ -60,7 +60,7 @@ class AnimalTest {
     @Test
     public void doesNotAnimalCrossMapBorder() {
         // given
-        MoveValidator validator = new RectangularMap(4,4);
+        MoveValidator validator = new RectangularMap(4,4, 4);
         Animal animalA = new Animal(4,4);
         Animal animalB = new Animal(-4, -4);
         Animal animalC = new Animal(-4, 4);

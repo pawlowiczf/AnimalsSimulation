@@ -26,34 +26,47 @@ public class World {
         System.out.println("Stop");
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws InterruptedException {
         //
-        System.out.println("System wystartował");
-        List<MoveDirection> directions;
-        List<Vector2d> positions;
+        List <MoveDirection> directions;
+        List <Vector2d> positions = new ArrayList<>();
 
         directions = directionParser(args); // nieobsłużenie wyjątku; program się zakończy
 
-        positions = new ArrayList<>();
         positions.add( new Vector2d(2, 2 ) );
         positions.add( new Vector2d(3, 2 ) );
         positions.add( new Vector2d(0,0  ) );
-//        RectangularMap animalsPark = new RectangularMap(10,10);
 
-        GrassField animalsPark = new GrassField(10);
-
+//        RectangularMap animalsParkA = new RectangularMap(1, 10,10);
+//        GrassField animalsParkB     = new GrassField(2,10);
+//
         ConsoleMapDisplay subscriber = new ConsoleMapDisplay();
-        animalsPark.addSubscriber(subscriber);
+//        animalsParkA.addSubscriber(subscriber);
+//        animalsParkB.addSubscriber(subscriber);
+//
+//        Simulation simulationA = new Simulation(positions, directions, animalsParkA);
+//        Simulation simulationB = new Simulation(positions, directions, animalsParkB);
+//
+//        List <Simulation> simulationList = new ArrayList <> ( Arrays.asList( simulationA, simulationB ) );
+//        SimulationEngine simulationEngine = new SimulationEngine( simulationList );
 
-        Simulation simulation = new Simulation(positions, directions, animalsPark);
-        simulation.run();
+        ArrayList <Simulation> simulationList = new ArrayList<>();
+
+        for (int counter = 0 ; counter < 1000 ; counter++ ) {
+            GrassField animalsPark = new GrassField(counter, 10);
+            animalsPark.addSubscriber(subscriber);
+            Simulation simulation  = new Simulation(positions, directions, animalsPark);
+
+            simulationList.add(simulation);
+        }
+
+        SimulationEngine simulationEngine = new SimulationEngine( simulationList );
+//        simulationEngine.runSync();
+//        simulationEngine.runAsync();
+        simulationEngine.runAsyncInThreadPool();
 
 
-
-//        run(directions);
-        System.out.println("System zakończył działanie");
-
+        System.out.println("System zakonczyl dzialanie");
     }
 
 }

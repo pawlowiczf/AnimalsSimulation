@@ -10,8 +10,8 @@ public class RectangularMap extends AbstractWorldMap {
     private final int width;
     private final int height;
 
-    public RectangularMap(int width, int height) {
-        super();
+    public RectangularMap(int mapID, int width, int height) {
+        super(mapID);
         this.width  = width;
         this.height = height;
     } // constructor
@@ -31,7 +31,7 @@ public class RectangularMap extends AbstractWorldMap {
     @Override
     public boolean canMoveTo(Vector2d position) {
         //
-        if ( super.canMoveTo(position) ){
+        if ( super.canMoveTo(position) ) {
             return position.precedes( new Vector2d(width, height) ) && position.follow( new Vector2d(0, 0) );
         }
         return false;
@@ -49,6 +49,7 @@ public class RectangularMap extends AbstractWorldMap {
         }
         return null;
     }
+
 
     public Boundary getCurrentBounds() {
         //
