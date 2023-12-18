@@ -1,5 +1,7 @@
 package agh.ics.oop;
 import agh.ics.oop.model.*;
+import agh.ics.oop.presenter.SimulationPresenter;
+import javafx.application.Application;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +30,8 @@ public class World {
 
     public static void main(String[] args) throws InterruptedException {
         //
+        Application.launch(SimulationApp.class, args);
+
         List <MoveDirection> directions;
         List <Vector2d> positions = new ArrayList<>();
 
@@ -52,7 +56,7 @@ public class World {
 
         ArrayList <Simulation> simulationList = new ArrayList<>();
 
-        for (int counter = 0 ; counter < 1000 ; counter++ ) {
+        for (int counter = 0 ; counter < 10 ; counter++ ) {
             GrassField animalsPark = new GrassField(counter, 10);
             animalsPark.addSubscriber(subscriber);
             Simulation simulation  = new Simulation(positions, directions, animalsPark);
@@ -63,7 +67,7 @@ public class World {
         SimulationEngine simulationEngine = new SimulationEngine( simulationList );
 //        simulationEngine.runSync();
 //        simulationEngine.runAsync();
-        simulationEngine.runAsyncInThreadPool();
+//        simulationEngine.runAsyncInThreadPool();
 
 
         System.out.println("System zakonczyl dzialanie");
