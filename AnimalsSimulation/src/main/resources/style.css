@@ -1,6 +1,7 @@
 HBox {
     -fx-alignment: center;
-    -fx-spacing: 8;
+    -fx-spacing: 30;
+    -fx-padding: 8;
 }
 
 VBox {
@@ -15,4 +16,10 @@ VBox {
 .button {
     -fx-pref-width: 128;
     -fx-pref-height: 32;
+}
+
+.text-field {
+    -fx-padding: 9;
+    -fx-min-width: 180;
+    -fx-min-height: 35;
 }

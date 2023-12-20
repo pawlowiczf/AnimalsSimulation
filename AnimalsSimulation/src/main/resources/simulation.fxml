@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             minHeight="550.0" minWidth="850.0" stylesheets="style.css"
@@ -12,16 +13,19 @@
 
 
     <top>
-        <TextField fx:id="moves">Wprowadź poprawne ruchy zwierzaków</TextField>
+        <HBox> <TextField fx:id="enteredMoves" text = "Wprowadź ruchy zwierzaków" /> </HBox>
+<!--        <HBox> <Label fx:id = "move-info"> </Label> </HBox>-->
+
     </top>
 
     <center>
-        <Label fx:id="infoLabel" text="All animals will be living here!" textAlignment="CENTER"/>
+        <Label fx:id="infoLabel" text="Symulacja zaraz się zacznie :)" textAlignment="CENTER"/>
+        <GridPane fx:id="mapGrid" gridLinesVisible="true"/>
     </center>
 
     <bottom>
         <HBox>
-            <Button text="Start" />
+            <Button text="Start" onAction = "#onSimulationStartClicked"/>
 
         </HBox>
     </bottom>
