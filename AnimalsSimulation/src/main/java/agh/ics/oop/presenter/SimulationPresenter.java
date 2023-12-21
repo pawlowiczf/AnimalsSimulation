@@ -3,6 +3,7 @@ package agh.ics.oop.presenter;
 import agh.ics.oop.OptionsParser;
 import agh.ics.oop.Simulation;
 import agh.ics.oop.model.*;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
@@ -32,55 +33,59 @@ public class SimulationPresenter implements MapChangeListener  {
     private GridPane mapGrid;
 
     public void drawMap() {
-//        infoLabel.setText( String.valueOf(map) ); tak było w pierwszej części konspektu, teraz tworzymy GridPane:
+//        infoLabel.setText( String.valueOf(map) );
+
+        Boundary boundary = map.getCurrentBounds();
+        int width  = boundary.rightBorder().getX() - boundary.leftBorder().getX() + 1;
+        int height = boundary.rightBorder().getY() - boundary.leftBorder().getY() + 1;
+
         clearGrid();
-        createNewGrid();
-        updateWorldElementsPositionGrid();
+        createNewGrid(width, height, boundary);
+        updateWorldElementsPositionGrid(height, boundary);
 
     }
 
-    private void createNewGrid() {
+    private void createNewGrid(int width, int height, Boundary boundary) {
         //
-        Boundary boundary = map.getCurrentBounds();
-        int mapWidth  = abs( boundary.rightBorder().getX() ) + abs( boundary.leftBorder().getX() );
-        int mapHeight = abs( boundary.rightBorder().getY() ) + abs( boundary.leftBorder().getY() );
-
-        int leftX = boundary.leftBorder().getX();
-        int upperY = boundary.rightBorder().getY();
-
         Label legend = new Label("y\\x");
         mapGrid.add(legend,0, 0);
 
+        GridPane.setHalignment(legend, HPos.CENTER);
         mapGrid.getColumnConstraints().add(new ColumnConstraints(25));
         mapGrid.getRowConstraints().add(new RowConstraints(25));
 
-        for (int counter = 0; counter < mapWidth; counter++) {
+        for (int counter = 0; counter < width; counter++) {
             //
             mapGrid.getColumnConstraints().add(new ColumnConstraints(25));
             mapGrid.getRowConstraints().add(new RowConstraints(25));
-            Label contentInside = new Label( "%d".formatted(leftX + counter) );
-            mapGrid.add( contentInside, counter + leftX, 0 );
+
+            Label contentInside = new Label( "%d".formatted(counter + boundary.leftBorder().getX() ) );
+            mapGrid.add( contentInside, counter + 1, 0 );
             GridPane.setHalignment(contentInside, HPos.CENTER);
         }
 
-        for (int counter = 0; counter < mapHeight ; counter++) {
+        for (int counter = 0; counter < height ; counter++) {
+            //
             mapGrid.getColumnConstraints().add(new ColumnConstraints(25));
             mapGrid.getRowConstraints().add(new RowConstraints(25));
-            Label contentInside = new Label( "%d".formatted(upperY - counter) );
-            mapGrid.add( contentInside, 0, upperY - counter);
+
+            Label contentInside = new Label( "%d".formatted(boundary.rightBorder().getY() - counter) );
+            mapGrid.add( contentInside, 0, counter + 1);
             GridPane.setHalignment(contentInside, HPos.CENTER);
         }
 
-    }
+    } // end method createNewGrid()
 
-    private void updateWorldElementsPositionGrid() {
+    private void updateWorldElementsPositionGrid(int height, Boundary boundary) {
         //
         List <WorldElement> worldElements = map.getElements();
 
         for (WorldElement element : worldElements) {
             //
+            int xPosition = element.getPosition().getX() - boundary.leftBorder().getX() + 1;
+            int yPosition = height - ( element.getPosition().getY() - boundary.leftBorder().getY() );
             Label contentInside = new Label( element.toString() );
-            mapGrid.add( contentInside, element.getPosition().getX(), element.getPosition().getY() );
+            mapGrid.add( contentInside, xPosition, yPosition );
             GridPane.setHalignment(contentInside, HPos.CENTER);
 
         }
@@ -92,10 +97,17 @@ public class SimulationPresenter implements MapChangeListener  {
         mapGrid.getRowConstraints().clear();
     }
 
+    @FXML
+    private Label moveInfo;
 
     @Override
     public void mapChanged(WorldMap worldMap, String message) {
-        drawMap();
+        //
+        Platform.runLater( () -> {
+            this.drawMap();
+            this.moveInfo.setText(message);
+        }
+        );
     }
 
     @FXML
@@ -103,7 +115,7 @@ public class SimulationPresenter implements MapChangeListener  {
 
 
     @FXML
-    private void onSimulationStartClicked() {
+    private void onSimulationStartClicked() throws InterruptedException {
         //
 
 //        String[] enteredChars = enteredMoves.getText().split( "\\s+" );
@@ -113,7 +125,10 @@ public class SimulationPresenter implements MapChangeListener  {
         List <Vector2d> positions       = List.of( new Vector2d(2, 2), new Vector2d(3, 2 ), new Vector2d(0,0  ) );
 
         Simulation simulation = new Simulation(positions, directions, map);
-        simulation.run();
+
+        SimulationEngine simulationEngine = new SimulationEngine( new ArrayList <> ( List.of(simulation) ) );
+        simulationEngine.runAsync();
+
 
     }
 }

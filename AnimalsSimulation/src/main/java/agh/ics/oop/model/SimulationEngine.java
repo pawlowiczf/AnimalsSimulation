@@ -41,7 +41,7 @@ public class SimulationEngine {
 
         }
 
-        awaitSimulationsEnd();
+//        awaitSimulationsEnd();
     } // end runAsync() method
 
     private void awaitSimulationsEnd() throws InterruptedException {
