@@ -15,7 +15,6 @@
 
     <top>
         <HBox> <TextField fx:id="enteredMoves" text = "Wprowadź ruchy zwierzaków" /> </HBox>
-
     </top>
 
     <center>
@@ -29,7 +28,7 @@
             </HBox>
 
             <HBox>
-                <Label fx:id="moveInfo" text="D"/>
+                <Label fx:id="moveInfo"/>
             </HBox>
         </VBox>
     </bottom>

@@ -57,7 +57,7 @@ public class SimulationPresenter implements MapChangeListener  {
         for (int counter = 0; counter < width; counter++) {
             //
             mapGrid.getColumnConstraints().add(new ColumnConstraints(25));
-            mapGrid.getRowConstraints().add(new RowConstraints(25));
+//            mapGrid.getRowConstraints().add(new RowConstraints(25));
 
             Label contentInside = new Label( "%d".formatted(counter + boundary.leftBorder().getX() ) );
             mapGrid.add( contentInside, counter + 1, 0 );
@@ -66,10 +66,10 @@ public class SimulationPresenter implements MapChangeListener  {
 
         for (int counter = 0; counter < height ; counter++) {
             //
-            mapGrid.getColumnConstraints().add(new ColumnConstraints(25));
+//            mapGrid.getColumnConstraints().add(new ColumnConstraints(25));
             mapGrid.getRowConstraints().add(new RowConstraints(25));
 
-            Label contentInside = new Label( "%d".formatted(boundary.rightBorder().getY() - counter) );
+            Label contentInside = new Label( "%d".formatted(height + boundary.leftBorder().getY() - counter - 1) );
             mapGrid.add( contentInside, 0, counter + 1);
             GridPane.setHalignment(contentInside, HPos.CENTER);
         }
@@ -122,7 +122,7 @@ public class SimulationPresenter implements MapChangeListener  {
 //        List <MoveDirection> directions = OptionsParser.directionParser(enteredChars);
 
         List <MoveDirection> directions = OptionsParser.directionParser(enteredMoves.getText().split(" "));
-        List <Vector2d> positions       = List.of( new Vector2d(2, 2), new Vector2d(3, 2 ), new Vector2d(0,0  ) );
+        List <Vector2d> positions       = List.of( new Vector2d(1, 0), new Vector2d(2, 0 ), new Vector2d(3,0  ) );
 
         Simulation simulation = new Simulation(positions, directions, map);
 

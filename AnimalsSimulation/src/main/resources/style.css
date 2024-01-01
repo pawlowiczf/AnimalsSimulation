@@ -23,3 +23,7 @@ VBox {
     -fx-min-width: 180;
     -fx-min-height: 35;
 }
+
+GridPane {
+    -fx-alignment: center;
+}
