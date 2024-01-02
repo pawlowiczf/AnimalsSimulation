@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            minHeight="100.0" minWidth="250.0" stylesheets="style.css"
+            fx:controller="agh.ics.oop.presenter.MenuPresenter">
+
+    <center>
+        <VBox>
+            <HBox>
+                <Button text="Start new simulation" onAction = "#startNewSimulation"/>
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>

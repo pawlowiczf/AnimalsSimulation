@@ -117,10 +117,6 @@ public class SimulationPresenter implements MapChangeListener  {
     @FXML
     private void onSimulationStartClicked() throws InterruptedException {
         //
-
-//        String[] enteredChars = enteredMoves.getText().split( "\\s+" );
-//        List <MoveDirection> directions = OptionsParser.directionParser(enteredChars);
-
         List <MoveDirection> directions = OptionsParser.directionParser(enteredMoves.getText().split(" "));
         List <Vector2d> positions       = List.of( new Vector2d(1, 0), new Vector2d(2, 0 ), new Vector2d(3,0  ) );
 
@@ -128,7 +124,6 @@ public class SimulationPresenter implements MapChangeListener  {
 
         SimulationEngine simulationEngine = new SimulationEngine( new ArrayList <> ( List.of(simulation) ) );
         simulationEngine.runAsync();
-
 
     }
 }

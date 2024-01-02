@@ -23,14 +23,8 @@ public class SimulationApp extends Application {
     public void start(Stage primaryStage) throws Exception {
         //
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getClassLoader().getResource("simulation.fxml"));
+        loader.setLocation(getClass().getClassLoader().getResource("menu.fxml"));
         BorderPane viewRoot = loader.load();
-
-        SimulationPresenter presenter = loader.getController();
-
-        GrassField currentMap = new GrassField(1, 10);
-        currentMap.addSubscriber(presenter);
-        presenter.setWorldMap(currentMap);
 
         configureStage(primaryStage, viewRoot);
         primaryStage.show();
