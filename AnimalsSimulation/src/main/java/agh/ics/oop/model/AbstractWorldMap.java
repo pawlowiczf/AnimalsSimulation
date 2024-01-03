@@ -4,9 +4,8 @@ import agh.ics.oop.model.util.MapVisualizer;
 import agh.ics.oop.model.util.PositionAlreadyOccupiedException;
 
 import java.sql.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public abstract class AbstractWorldMap implements WorldMap{
     //
@@ -94,4 +93,19 @@ public abstract class AbstractWorldMap implements WorldMap{
     public int getId() {
         return this.mapId;
     }
+
+    @Override
+    public List <Animal> getOrderedAnimals() {
+        //
+        ArrayList <Vector2d> animalsPositions = new ArrayList<>( this.animals.keySet() );
+
+        // Klasa Vector2d realizuje interfejs Comparable;
+        Collections.sort( animalsPositions );
+
+        return animalsPositions.stream()
+                .map( position -> animals.get(position) )
+                .collect( Collectors.toList() );
+
+    } // end method getOrderedAnimals()
+
 }

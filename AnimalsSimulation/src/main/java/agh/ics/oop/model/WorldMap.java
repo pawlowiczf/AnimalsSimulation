@@ -5,6 +5,8 @@ import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.util.PositionAlreadyOccupiedException;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * The interface responsible for interacting with the map of the world.
@@ -39,14 +41,18 @@ public interface WorldMap extends MoveValidator {
     boolean isOccupied(Vector2d position);
 
     ArrayList <WorldElement> getElements();
+
+
     /**
      * Return an animal at a given position.
      *
      * @param position The position of the animal.
      * @return animal or null if the position is not occupied.
      */
-
     WorldElement objectAt(Vector2d position);
+
+
+    List <Animal> getOrderedAnimals();
 
     int getId();
 
