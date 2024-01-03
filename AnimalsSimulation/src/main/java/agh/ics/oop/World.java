@@ -32,23 +32,25 @@ public class World {
         //
 //        Application.launch(SimulationApp.class, args);
 
-//        List <MoveDirection> directions;
-//        List <Vector2d> positions = new ArrayList<>();
-//
-//        directions = directionParser(args); // nieobsłużenie wyjątku; program się zakończy
-//
-//        positions.add( new Vector2d(2, 2 ) );
-//        positions.add( new Vector2d(3, 2 ) );
-//        positions.add( new Vector2d(0,0  ) );
-//
-////        RectangularMap animalsParkA = new RectangularMap(1, 10,10);
+        List <MoveDirection> directions;
+        List <Vector2d> positions = new ArrayList<>();
+
+        directions = directionParser(args); // nieobsłużenie wyjątku; program się zakończy
+
+        positions.add( new Vector2d(2, 2 ) );
+        positions.add( new Vector2d(3, 2 ) );
+        positions.add( new Vector2d(0,0  ) );
+
+        RectangularMap animalsParkA = new RectangularMap(1, 10,10);
 //        GrassField animalsParkB     = new GrassField(2,10);
 //
-//        ConsoleMapDisplay subscriber = new ConsoleMapDisplay();
-////        animalsParkA.addSubscriber(subscriber);
+        ConsoleMapDisplay subscriber = new ConsoleMapDisplay();
+        animalsParkA.addSubscriber(subscriber);
 //        animalsParkB.addSubscriber(subscriber);
 //
-////        Simulation simulationA = new Simulation(positions, directions, animalsParkA);
+        Simulation simulationA = new Simulation(positions, directions, animalsParkA);
+        simulationA.run();
+
 //        Simulation simulationB = new Simulation(positions, directions, animalsParkB);
 //
 //        List <Simulation> simulationList = new ArrayList <> ( Arrays.asList( simulationA, simulationB ) );

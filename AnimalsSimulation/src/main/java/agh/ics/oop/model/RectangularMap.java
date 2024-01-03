@@ -4,6 +4,7 @@ import agh.ics.oop.model.util.PositionAlreadyOccupiedException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class RectangularMap extends AbstractWorldMap {
     //
@@ -42,12 +43,13 @@ public class RectangularMap extends AbstractWorldMap {
     }
 
     @Override
-    public Animal objectAt(Vector2d position) {
+    public Optional <WorldElement> objectAt(Vector2d position) {
         //
         if ( isOccupied(position) ) {
-            return this.animals.get( position );
+            return Optional.of( animals.get( position ) );
         }
-        return null;
+
+        return Optional.empty();
     }
 
 

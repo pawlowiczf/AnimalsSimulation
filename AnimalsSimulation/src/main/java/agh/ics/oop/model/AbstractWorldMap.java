@@ -62,7 +62,7 @@ public abstract class AbstractWorldMap implements WorldMap{
         return !isOccupied(position);
     }
 
-    public ArrayList<WorldElement> getElements() {
+    public List <WorldElement> getElements() {
         return new ArrayList <> ( animals.values() );
     }
 
