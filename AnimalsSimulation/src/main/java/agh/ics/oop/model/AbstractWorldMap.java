@@ -37,7 +37,7 @@ public abstract class AbstractWorldMap implements WorldMap{
             animals.put( animal.getPosition(), animal );
 
             if ( ! animal.getPosition().equals(oldPosition) ) {
-                mapChanged( "Animal changed its position!");
+                mapChanged( "Animal changed its position from (%d, %d) to (%d, %d)!".formatted( oldPosition.getX(), oldPosition.getY(), animal.getPosition().getX(), animal.getPosition().getY() ));
             }
 
         } // end 'if' clause

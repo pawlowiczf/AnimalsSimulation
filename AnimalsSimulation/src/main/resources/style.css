@@ -1,0 +1,29 @@
+HBox {
+    -fx-alignment: center;
+    -fx-spacing: 30;
+    -fx-padding: 8;
+}
+
+VBox {
+    -fx-spacing: 16;
+    -fx-padding: 16;
+}
+
+.spinner {
+    -fx-pref-width: 64;
+}
+
+.button {
+    -fx-pref-width: 128;
+    -fx-pref-height: 32;
+}
+
+.text-field {
+    -fx-padding: 9;
+    -fx-min-width: 180;
+    -fx-min-height: 35;
+}
+
+GridPane {
+    -fx-alignment: center;
+}

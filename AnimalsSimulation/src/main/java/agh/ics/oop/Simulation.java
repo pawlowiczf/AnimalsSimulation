@@ -45,7 +45,15 @@ public class Simulation implements Runnable {
             Animal currentAnimal = this.animals.get( currentIndex );
             animalsPark.move( currentAnimal, direction );
 
+
+            try {
+                Thread.sleep(700);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
             index += 1;
+
         } // end 'for each' loop
 
     } // end 'run' method

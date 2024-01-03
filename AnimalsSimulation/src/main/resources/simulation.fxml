@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            minHeight="550.0" minWidth="850.0" stylesheets="style.css"
+            fx:controller="agh.ics.oop.presenter.SimulationPresenter">
+
+
+    <top>
+        <HBox> <TextField fx:id="enteredMoves" text = "Wprowadź ruchy zwierzaków" /> </HBox>
+    </top>
+
+    <center>
+        <GridPane fx:id="mapGrid" gridLinesVisible="true"/>
+    </center>
+
+    <bottom>
+        <VBox>
+            <HBox>
+                <Button text="Start" onAction = "#onSimulationStartClicked"/>
+            </HBox>
+
+            <HBox>
+                <Label fx:id="moveInfo"/>
+            </HBox>
+        </VBox>
+    </bottom>
+
+</BorderPane>
