@@ -45,6 +45,9 @@ public class World {
 //        GrassField animalsParkB     = new GrassField(2,10);
 //
         ConsoleMapDisplay subscriber = new ConsoleMapDisplay();
+        FileMapDisplay updateFiles = new FileMapDisplay();
+
+        animalsParkA.addSubscriber(updateFiles);
         animalsParkA.addSubscriber(subscriber);
 //        animalsParkB.addSubscriber(subscriber);
 //
