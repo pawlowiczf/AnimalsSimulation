@@ -43,7 +43,7 @@ public class World {
 
         RectangularMap animalsParkA = new RectangularMap(1, 10,10);
 //        GrassField animalsParkB     = new GrassField(2,10);
-//
+
         ConsoleMapDisplay subscriber = new ConsoleMapDisplay();
         FileMapDisplay updateFiles = new FileMapDisplay();
 

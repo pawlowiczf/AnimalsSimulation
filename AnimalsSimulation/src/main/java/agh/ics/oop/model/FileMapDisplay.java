@@ -1,9 +1,6 @@
 package agh.ics.oop.model;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 public class FileMapDisplay implements MapChangeListener {
@@ -11,32 +8,22 @@ public class FileMapDisplay implements MapChangeListener {
 
     @Override
     public void mapChanged(WorldMap worldMap, String message) {
-
+        //
         String path = "map_" + worldMap.getId() + ".log";
         File mapFileChanges = new File(path);
-        boolean success = mapFileChanges.createNewFile();
 
-        try {
-            mapFileChanges.createNewFile();
-            updateMap( path, worldMap.toString() );
+        try (PrintWriter printToFile = new PrintWriter( new FileWriter(mapFileChanges, true) )) {
+            //
+            if ( !mapFileChanges.exists() ) { mapFileChanges.createNewFile(); }
 
-        } catch (IOException error) {
-            error.printStackTrace();
+            printToFile.println(message);
+            printToFile.append( worldMap.toString() );
+            printToFile.println( "----------------------------");
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
     } // end method mapChanged()
-
-
-    private void updateMap(String path, String mapString) throws FileNotFoundException {
-        //
-        try (PrintWriter content = new PrintWriter(path) ) {
-            //
-            content.append(mapString);
-
-        } catch (FileNotFoundException error) {
-            error.printStackTrace();
-        }
-
-    } // end method updateMap()
 
 }
