@@ -30,6 +30,7 @@ public class World {
 
     public static void main(String[] args) throws InterruptedException {
         //
+        // Jeśli chcemy aplikację, to trzeba odkomentować:
 //        Application.launch(SimulationApp.class, args);
 
         List <MoveDirection> directions;

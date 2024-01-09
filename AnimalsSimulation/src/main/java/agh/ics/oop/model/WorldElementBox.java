@@ -16,19 +16,14 @@ public class WorldElementBox {
     public WorldElementBox(WorldElement element) {
         //
         this.image = new Image( element.getFilePath() );
-        this.imageView = new ImageView();
+        this.imageView = new ImageView(image);
         imageView.setFitHeight(20);
         imageView.setFitWidth(20);
     }
 
-    public void setImage() {
-        this.imageView.setImage(image);
+    public ImageView getImage() {
+        return imageView;
     }
 
-    public VBox newVBox() {
-        //
-        VBox newBox = new VBox();
-        newBox.
-    }
 
 }
