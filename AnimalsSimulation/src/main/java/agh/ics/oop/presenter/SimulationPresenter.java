@@ -32,6 +32,7 @@ public class SimulationPresenter implements MapChangeListener  {
     @FXML
     private GridPane mapGrid;
 
+
     public void drawMap() {
 //        infoLabel.setText( String.valueOf(map) );
 
@@ -84,8 +85,11 @@ public class SimulationPresenter implements MapChangeListener  {
             //
             int xPosition = element.getPosition().getX() - boundary.leftBorder().getX() + 1;
             int yPosition = height - ( element.getPosition().getY() - boundary.leftBorder().getY() );
-            Label contentInside = new Label( element.toString() );
+
+            Label contentInside = new Label( "" );
+            contentInside.setGraphic( new WorldElementBox(element).getImage() );
             mapGrid.add( contentInside, xPosition, yPosition );
+
             GridPane.setHalignment(contentInside, HPos.CENTER);
 
         }

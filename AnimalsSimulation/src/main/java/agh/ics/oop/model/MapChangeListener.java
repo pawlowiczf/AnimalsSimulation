@@ -1,7 +1,9 @@
 package agh.ics.oop.model;
 
+@FunctionalInterface
 public interface MapChangeListener {
     //
+
     void mapChanged(WorldMap worldMap, String message);
 
     // Wzorzec projektowy - observer - stosowałbym go wtedy, gdy zmiana atrybutu, wywołanie jakiejś metody w danej klasie

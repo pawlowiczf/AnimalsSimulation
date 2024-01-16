@@ -65,5 +65,11 @@ public class Animal implements WorldElement{
     public Vector2d getPosition() {
         return position;
     }
+
+    @Override
+    public String getFilePath() {
+        return "animalImg.jpeg";
+    }
+
 } // end 'Animal' class
 

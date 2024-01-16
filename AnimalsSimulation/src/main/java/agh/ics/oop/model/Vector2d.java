@@ -2,7 +2,7 @@ package agh.ics.oop.model;
 
 import java.util.Objects;
 
-public class Vector2d {
+public class Vector2d implements Comparable<Vector2d> {
     private final int x;
     private final int y;
 
@@ -75,4 +75,11 @@ public class Vector2d {
     }
 
 
+    @Override
+    public int compareTo(Vector2d other) {
+        //
+        if ( this.x < other.getX() || ( this.x == other.getX() && this.y < other.getY() ) ) { return -1; }
+        if ( this.x == other.getX() && this.y == other.getY() ) { return 0; }
+        return 1;
+    }
 }
