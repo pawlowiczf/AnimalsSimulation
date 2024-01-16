@@ -1,8 +1,8 @@
+package model
+
 interface WorldMap {
     //
     fun place(animal : Animal) : Unit;
-
-    fun move(animal : Animal, direction : MoveDirection) : Unit;
 
     fun isOccupied(position : Vector2D) : Boolean;
 

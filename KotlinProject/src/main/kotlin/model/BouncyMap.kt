@@ -1,6 +1,8 @@
-class BouncyMap (val width : Int, val height : Int) : WorldMap { // end class BouncyMap
+package model
+
+class BouncyMap (private val width : Int, private val height : Int) : WorldMap { // end class BouncyMap
     //
-    var animalsPosition : MutableMap <Vector2D, Animal> = mutableMapOf();
+    private var animalsPosition : MutableMap <Vector2D, Animal> = mutableMapOf();
 
     override fun place(animal: Animal) : Unit {
         val animalPosition: Vector2D = animal.position;
@@ -10,11 +12,11 @@ class BouncyMap (val width : Int, val height : Int) : WorldMap { // end class Bo
     }
 
     private fun bounceAnimals(animal : Animal) : Unit {
+        //
+        val position = animalsPosition.randomFreePosition( Vector2D(width, height) ) ?: return Unit;
 
-    }
-
-    override fun move(animal: Animal, direction: MoveDirection) : Unit {
-        TODO("Not yet implemented")
+        animalsPosition[position] = animal;
+        animal.position = position;
     }
 
     override fun isOccupied(position: Vector2D) : Boolean = animalsPosition.containsKey(position);

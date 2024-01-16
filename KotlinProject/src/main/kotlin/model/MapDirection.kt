@@ -1,3 +1,5 @@
+package model
+
 enum class MapDirection {
     //
     NORTH, SOUTH, WEST, EAST;
