@@ -10,17 +10,10 @@ enum class MapDirection {
     }
 
     fun previous() : MapDirection = when (this) {
-        EAST  -> NORTH;
+        EAST -> NORTH;
         NORTH -> WEST;
-        WEST  -> SOUTH;
+        WEST -> SOUTH;
         SOUTH -> EAST;
-    }
-
-    fun toUnitVector() : Vector2D = when (this) {
-        NORTH -> Vector2D(0, 1);
-        EAST  -> Vector2D(1, 0);
-        SOUTH -> Vector2D(0, -1);
-        WEST  -> Vector2D(-1, 0);
     }
 
     override fun toString() : String = when (this) {

@@ -16,8 +16,15 @@ data class Vector2D (var x : Int, var y : Int) {
 
     fun opposite () : Vector2D = this.copy( x = -x, y = -y);
 
+    fun MapDirection.toUnitVector() : Vector2D = when (this) {
+        //
+        MapDirection.NORTH -> Vector2D(0, 1);
+        MapDirection.EAST  -> Vector2D(1, 0);
+        MapDirection.SOUTH -> Vector2D(0, -1);
+        MapDirection.WEST  -> Vector2D(-1, 0);
+    }
 
-}
+} // end class Vector2D
 
 fun main() {
     //
